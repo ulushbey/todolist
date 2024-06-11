@@ -1,25 +1,35 @@
 import React from "react";
+import { Todo } from "../types/Todo.type";
 
-const TodoItem = () => {
+type T = {
+  todo: Todo;
+};
+const TodoItem = ({ todo }: T) => {
   return (
     <div className="border-2 rounded-lg p-2 flex justify-between">
-      <h5>Learn ReactJs basics</h5>
+      <h5>{todo.todo}</h5>
       <div className="flex gap-4 items-center">
-        <button className="h-5 w-5 border-2 border-green-500 rounded flex-items-center justify-center">
-          {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2.5}
-            stroke="currentColor"
-            className="size-4 text-green-500"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m4.5 12.75 6 6 9-13.5"
-            />
-          </svg> */}
+        <button
+          className={`${
+            todo.completed ? "border-green-500" : "border-grey-500"
+          } h-5 w-5 border-2 rounded flex-items-center justify-center`}
+        >
+          {todo.completed && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2.5}
+              stroke="currentColor"
+              className="size-4 text-green-500"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m4.5 12.75 6 6 9-13.5"
+              />
+            </svg>
+          )}
         </button>
         <button>
           <svg

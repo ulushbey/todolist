@@ -13,11 +13,9 @@ const TodoList = ({ todos }: T) => {
       <TodoFilter />
 
       <div className="flex flex-col gap-3">
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
+        {todos.map((item) => (
+          <TodoItem key={item.id} todo={item} />
+        ))}
       </div>
     </div>
   );
