@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 
 import { Provider } from "react-redux";
 import React, { ReactNode } from "react";
