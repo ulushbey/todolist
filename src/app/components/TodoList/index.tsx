@@ -1,6 +1,7 @@
 import React from "react";
 import { Todo } from "../types/Todo.type";
 import TodoFilter from "../TodoFilter";
+import TodoItem from "../TodoItem";
 
 type T = {
   todos: Todo[];
@@ -10,6 +11,14 @@ const TodoList = ({ todos }: T) => {
     <div>
       <h3 className="text-3xl text-center mt-5">TodoList</h3>
       <TodoFilter />
+
+      <div className="flex flex-col gap-3">
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+      </div>
     </div>
   );
 };
