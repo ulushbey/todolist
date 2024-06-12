@@ -1,18 +1,36 @@
 import React from "react";
 import { Todo } from "../types/Todo.type";
+import { useAppDispatch } from "@/redux/store";
+import { DELETE_TODO, TOGGLE_TODO } from "@/services/todo.service";
+import { deleteTodo, selectTodo, toggleTodo } from "@/redux/slices/todoSlice";
 
 type T = {
   todo: Todo;
 };
 const TodoItem = ({ todo }: T) => {
+  const dispatch = useAppDispatch();
+  const deleteItem = async (id: number) => {
+    const data = await DELETE_TODO(id);
+    if (data.isDeleted) {
+      dispatch(deleteTodo(id));
+    }
+  };
+
+  const toggleItem = async (todo: Todo) => {
+    const data = await TOGGLE_TODO(todo.id, !todo.completed);
+
+    dispatch(toggleTodo(data));
+    console.log("data: ", data);
+  };
   return (
-    <div className="border-2 rounded-lg p-2 flex justify-between">
+    <div className="border-2 rounded-lg p-2 flex  justify-between">
       <h5>{todo.todo}</h5>
       <div className="flex gap-4 items-center">
         <button
+          onClick={() => toggleItem(todo)}
           className={`${
             todo.completed ? "border-green-500" : "border-grey-500"
-          } h-5 w-5 border-2 rounded flex-items-center justify-center`}
+          } h-5 w-5 border-2  rounded flex items-center justify-center`}
         >
           {todo.completed && (
             <svg
@@ -31,7 +49,7 @@ const TodoItem = ({ todo }: T) => {
             </svg>
           )}
         </button>
-        <button>
+        <button onClick={() => dispatch(selectTodo(todo))}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -47,7 +65,7 @@ const TodoItem = ({ todo }: T) => {
             />
           </svg>
         </button>
-        <button>
+        <button onClick={() => deleteItem(todo.id)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
